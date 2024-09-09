@@ -1,5 +1,5 @@
 - name: installing and starting the nginx service
-  hosts: 172.31.84.48
+  hosts: nginx
   become: yes
   serial: 3 #so this dynamic attribute will execute this script play level per 3 servers at each time. if you provide both forks(ansible.cfg) and serial in play level, then also serial exectuion will takes place
   tasks:
