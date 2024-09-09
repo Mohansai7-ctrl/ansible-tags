@@ -1,0 +1,5 @@
+- name: configuring the backend managed node
+  hosts: backend
+  become: yes
+  roles:
+  - backend

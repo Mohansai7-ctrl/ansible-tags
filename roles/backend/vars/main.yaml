@@ -1,0 +1,7 @@
+login_user: root
+login_host: mysql.mohansai.online
+login_password: ExpenseApp@1
+BACKEND_HOST: backend.mohansai.online
+
+component: backend
+app_location: /app

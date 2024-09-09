@@ -1,0 +1,65 @@
+- name: configuring the backend server, first by disabling the defaults version of required appliation nodejs
+  ansible.builtin.command: dnf module disable nodejs -y
+
+- name: Enabing the nodejs of version 20
+  ansible.builtin.command: dnf module enable nodejs:20 -y
+
+- name: Installing the nodejs
+  ansible.builtin.package:
+    name: "{{ item }}"
+    state: installed
+  loop:
+    - nodejs
+    - mysql
+    
+
+- name: creating expense user
+  ansible.builtin.user:
+    name: expense
+
+- name: using handlers now to notify when change in /app content or downloading again
+  ansible.builtin.import_role:
+    name: common
+    tasks_from: app-pre-req
+
+
+- name:
+  ansible.builtin.debug:
+    msg: " app directory is created "
+
+- name: Installing required dependencies by installing the build tool npm
+  ansible.builtin.command: npm install
+  args:
+    chdir: /app
+
+
+- name: backend.service
+  ansible.builtin.template:
+    src: backend.service.j2
+    dest: /etc/systemd/system/backend.service
+
+
+- name: installing few dependent packages that required to connect to mysql_db
+  ansible.builtin.pip:
+    name:
+    - PyMySQL
+    - cryptography
+    executable: pip3.9
+
+- name: importing the mysql table
+  community.mysql.mysql_db:
+    login_host: "{{ login_host }}"
+    login_user: root
+    login_password: "{{ login_password }}"
+    target: /app/schema/backend.sql
+    name: all
+    state: import
+
+
+- name: reloading and starting the backend.service
+  ansible.builtin.systemd_service:
+    daemon-reload: true
+    state: restarted
+    name: backend
+
+
