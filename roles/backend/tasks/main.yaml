@@ -18,16 +18,22 @@
     name: expense
 
 - name: using handlers now to notify when change in /app content or downloading again
+  tags:
+  - deployment
   ansible.builtin.import_role:
     name: common
     tasks_from: app-pre-req
 
 
 - name:
+  tags:
+  - deployment
   ansible.builtin.debug:
     msg: " app directory is created "
 
 - name: Installing required dependencies by installing the build tool npm
+  tags:
+  - deployment
   ansible.builtin.command: npm install
   args:
     chdir: /app
@@ -57,6 +63,8 @@
 
 
 - name: reloading and starting the backend.service
+  tags:
+  - deployment
   ansible.builtin.systemd_service:
     daemon-reload: true
     state: restarted
