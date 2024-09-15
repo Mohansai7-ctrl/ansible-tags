@@ -43,11 +43,12 @@ else
 fi
 
 
-DISK_PERCENTAGE=$(df -hT | grep xfs | awk -F " " '{print $6F}')
-DISK_FILE=$(df -hT | grep xfs | awk -F " " '{print $NF }')
 
-while IFS=read -r file
+while IFS=read -r line
 do
+DISK_PERCENTAGE=$(echo $line | awk -F " " '{print $6F}')
+DISK_FILE=$(echo $line | awk -F " " '{print $NF }')
+
 if [ $DISK_PERCENTAGE -gt $THRESHOLD ]
 then    
  echo -e "$Y need to check these xfs files as having more than threshold $DISK_FILE $N"
