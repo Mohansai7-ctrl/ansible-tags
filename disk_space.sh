@@ -12,6 +12,7 @@ Y="\e[33m"
 B="\e[34m"
 N="\e[0m"
 
+mkdir -p var/logs/expense
 LOGS_FOLDER="/var/logs/expense"
 SCRIPT_NAME="(echo $0 | awk -F "." '{print 1F}')"
 TIMESTAMP=$(date +%Y-%h-%m-%H-%M-%S)
