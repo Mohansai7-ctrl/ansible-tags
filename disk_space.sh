@@ -43,8 +43,8 @@ else
 fi
 
 
-DISK_PERCENTAGE=($DISK_FILES | awk -F " " '{print $6F}')
-DISK_FILE=($DISK_FILES | awk -F " " '{print $NF }')
+DISK_PERCENTAGE=$($DISK_FILES | awk -F " " '{print $6F}')
+DISK_FILE=$($DISK_FILES | awk -F " " '{print $NF }')
 
 while IFS=read -r file
 do
