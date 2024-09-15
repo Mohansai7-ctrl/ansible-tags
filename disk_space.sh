@@ -19,7 +19,7 @@ TIMESTAMP=$(date +%Y-%h-%m-%H-%M-%S)
 LOG_FILE=($LOGS_FOLDER/$SCRIPT_NAME/$TIMESTAMP-app.log)
 THRESHOLD=5
 
-DISK_FILES=$(df -ht | grep xfs)
+DISK_FILES=$(df -hT | grep xfs)
 
 VALIDATE(){
     if [ $1 -ne 0 ]
