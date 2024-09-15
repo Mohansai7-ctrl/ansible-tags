@@ -2,7 +2,7 @@
 userid=$(id -u)
 
 CHECK(){
-    echo "you dont have root privileges, plese login or use root access"
+    echo -e "$R you dont have root privileges, plese login or use root access $N "
     exit 1
 }
 
