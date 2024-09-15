@@ -34,7 +34,7 @@ VALIDATE(){
 }
 
 
-if [ $userid -ne 0 ]
+if [ ${userid} -ne 0 ]
 then
     CHECK
 else
