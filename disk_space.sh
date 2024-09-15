@@ -43,8 +43,8 @@ else
 fi
 
 
-DISK_PERCENTAGE=(df -hT | grep xfs | awk -F " " '{print $6F}')
-DISK_FILE=(df -hT | grep xfs | awk -F " " '{print $NF }')
+DISK_PERCENTAGE=$(df -hT | grep xfs | awk -F " " '{print $6F}')
+DISK_FILE=$(df -hT | grep xfs | awk -F " " '{print $NF }')
 
 while IFS=read -r file
 do
