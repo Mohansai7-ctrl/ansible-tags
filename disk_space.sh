@@ -17,9 +17,9 @@ LOGS_FOLDER="/var/logs/expense"
 SCRIPT_NAME="(echo $0 | awk -F "." '{print 1F}')"
 TIMESTAMP=$(date +%Y-%h-%m-%H-%M-%S)
 LOG_FILE=($LOGS_FOLDER/$SCRIPT_NAME/$TIMESTAMP-app.log)
-THRESHOLD =5
+THRESHOLD=5
 
-DISK_FILES = $(df -ht | grep xfs)
+DISK_FILES=$(df -ht | grep xfs)
 
 VALIDATE(){
     if [ $1 -ne 0 ]
@@ -43,12 +43,12 @@ else
 fi
 
 
-DISK_PERCENTAGE = ($DISK_FILES | awk -F " " '{print 6F}' )
-DISK_FILE = ($DISK_FILES | awk -F " " '{print NF }' )
+DISK_PERCENTAGE=($DISK_FILES | awk -F " " '{print 6F}' )
+DISK_FILE=($DISK_FILES | awk -F " " '{print NF }' )
 
 while IFS=read -r file
 do
-if [ $DISK_PERCENTAGE - gt $THRESHOLD ]
+if [ $DISK_PERCENTAGE -gt $THRESHOLD ]
 then    
  echo -e "$Y need to check these xfs files as having more than threshold $DISK_FILE $N"
  echo "files are $file "
